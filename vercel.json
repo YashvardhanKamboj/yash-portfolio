@@ -6,26 +6,14 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "server.js"
+      "source": "/api/(.*)",
+      "destination": "/server.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-  ],
-  "headers": [
-    {
-      "source": "/assets/Yash-Kamboj-Resume.pdf",
-      "headers": [
-        { "key": "Content-Disposition", "value": "attachment; filename=\"Yash-Kamboj-Resume.pdf\"" },
-        { "key": "Cache-Control", "value": "public, max-age=3600, immutable" }
-      ]
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
