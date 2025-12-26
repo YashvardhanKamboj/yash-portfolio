@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  portfolio:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/portfolio
+      - PORT=3000
+    depends_on:
+      - mongo
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+    networks:
+      - portfolio-network
+
+volumes:
+  mongo-data:
+
+networks:
+  portfolio-network:
+    driver: bridge
+
